@@ -99,6 +99,7 @@ public class CopyByCharacter {
 			bufw.newLine();
 			bufw.flush();
 		}
+		
 		bufr.close();
 		bufw.close();
 	}
