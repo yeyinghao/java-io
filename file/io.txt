@@ -21,5 +21,92 @@ io分类:
     写:OutputStream(输出流)	
 处理字符流的两大父类:
     读:Reader
-    写:Writer     		     
+    写:Writer  
+    
+/*  
+流操作的基本规律。  
+一、两个明确：(明确体系)  
+1. 明确源和目的  
+    源：输入流  InputStream  Reader  
+    目的：输出流  OutputStream Writer  
+  
+2. 操作的数据是否是纯文本  
+    是： 字符流  
+    否： 字节流  
+二、明确体系后要明确具体使用的对象  
+    通过设备区分：内存，硬盘，键盘  
+    目的设备：内存，硬盘，控制台  
+  
+  
+示例1：将一个文本文件中的数据存储到另一个文件中: 复制文件  
+    一、明确体系  
+        源：文件-->读取流-->(InputStream和Reader)  
+        是否是文本：是-->Reader  
+          
+          
+        目的：文件-->写入流-->(OutputStream Writer)  
+        是否纯文本：是-->Writer  
+      
+    二、 明确设备  
+        源：Reader  
+            设备：硬盘上一个文本文件 --> 子类对象为：FileReader  
+                FileReader fr = new FileReader("Goods.txt");  
+              
+            是否提高效率：是-->加入Reader中的缓冲区：BufferedReader  
+                BufferedReader bufr = new BufferedReader(fr);  
+                  
+        目的：Writer  
+            设备：键盘上一个文本文件 --> 子类对象：FileWriter  
+                FileWriter fw = new FileWriter("goods1.txt");  
+            是否提高效率：是-->加入Writer的缓冲区：BufferedWriter  
+                BufferedWriter bufw = new BufferedWriter(fw);  
+              
+              
+              
+示例2：将一个图片文件数据复制到另一个文件中：复制文件  
+    一、明确体系  
+        源：文件-->读取流-->(InputStream和Reader)  
+        是否是文本：否-->InputStream  
+          
+          
+        目的：文件-->写入流-->(OutputStream Writer)  
+        是否纯文本：否-->OutputStream  
+      
+    二、 明确设备  
+        源：InputStream  
+            设备：硬盘上一个媒体文件 --> 子类对象为：FileInputStream  
+                FileInputStream fis = new FileInputStream("Goods.txt");  
+              
+            是否提高效率：是-->加入InputStream中的缓冲区：BufferedInputStream  
+                BufferedInputStream bufi = new BufferedInputStream(fis);  
+                  
+        目的：OutputStream  
+            设备：键盘上一个媒体文件 --> 子类对象：FileOutputStream  
+                FileOutputStream fos = new FileOutputStream("goods1.txt");  
+            是否提高效率：是-->加入OutputStream的缓冲区：BufferedOutputStream  
+                BufferedOutputStream bufo = new BufferedOutputStream(fw);  
+  
+示例3：将键盘录入的数据保存到一个文本文件中  
+    一、明确体系  
+        源：键盘-->读取流-->(InputStream和Reader)  
+        是否是文本：是-->Reader  
+          
+          
+        目的：文件-->写入流-->(OutputStream Writer)  
+        是否纯文本：是-->Writer  
+      
+    二、 明确设备  
+        源：InputStream  
+            设备：键盘 --> 对用对象为：System.in --> InputStream  
+                为了操作方便，转成字符流Reader --> 使用Reader中的转换流：InputStreamReader  
+                InputStreamReader isr = new InputStreamReader(System.in);  
+              
+            是否提高效率：是-->加入Reader中的缓冲区：BufferedReader  
+                BufferedReader bufr = new BufferedReader(isr);  
+                  
+        目的：Writer  
+            设备：键盘上一个文本文件 --> 子类对象：FileWriter  
+                FileWriter fw = new FileWriter("goods1.txt");  
+            是否提高效率：是-->加入Writer的缓冲区：BufferedWriter  
+                BufferedWriter bufw = new BufferedWriter(fw);         		     
  	     		     
